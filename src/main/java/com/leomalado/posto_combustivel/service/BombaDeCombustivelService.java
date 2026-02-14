@@ -13,24 +13,17 @@ public class BombaDeCombustivelService {
 
     private final BombaDeCombustiveRepostory bombaDeCombustiveRepostory;
 
-    public void criar(BombasDeCombustivel bombasDeCombustivel){
-        BombaDeCombustiveRepostory.save(bombasDeCombustivel);
-    }
-    public BombasDeCombustivel buscarBombaCombustivelPorId(Integer id){
-        return (BombasDeCombustivel) bombaDeCombustiveRepostory.findById(id).orElseThrow(() ->
-                new NullPointerException("Bomba de combustível não encontrada pelo id" + id));
+    public BombasDeCombustivel criar(BombasDeCombustivel bombasDeCombustivel){
+        return bombaDeCombustiveRepostory.save(bombasDeCombustivel);
     }
 
-    private List<BombaDeCombustiveRepostory> buscarBombasDeCombustivel(){
+    public BombasDeCombustivel buscarBombaCombustivelPorId(Integer id){
+        return (BombasDeCombustivel) bombaDeCombustiveRepostory.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Bomba de combustível não encontrada pelo id " + id));
+    }
+
+    public List<BombasDeCombustivel> buscarBombasDeCombustivel(){
         return bombaDeCombustiveRepostory.findAll();
     }
-
-    private void deletarBombaCombustivel(Integer id){
-        bombaDeCombustiveRepostory.deleteById(id);
-    }
-
-    private void alterarBombaCombustivel(BombasDeCombustivel bombasDeCombustivel){
-        BombaDeCombustiveRepostory.save(bombasDeCombustivel);
-    }
-
 }
